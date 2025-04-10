@@ -1,8 +1,6 @@
-@extends('layout/pantilla')
+<?php $__env->startSection('titulopagina','crud con Laravel'); ?>
 
-@section('titulopagina','crud con Laravel')
-
-@section('contenido')
+<?php $__env->startSection('contenido'); ?>
 
 
 <div class="card">
@@ -10,16 +8,17 @@
   <div class="card-body">
     <div class="row">
       <div class="col-sm-12">
-        @if ($mensaje=Session::get('success'))
+        <?php if($mensaje=Session::get('success')): ?>
         <div class="alert alert-success" role="alert">
-       {{$mensaje}}
+       <?php echo e($mensaje); ?>
+
 </div>
-@endif
+<?php endif; ?>
       </div>
 </div>
     <h5 class="card-title text-center">Listado de personas en el sistema</h5>
     <p>
-    <a href="{{ route('clientes.create') }}" class="btn btn-primary">
+    <a href="<?php echo e(route('clientes.create')); ?>" class="btn btn-primary">
       <span class= "bi bi-plus"></span> Agregar nueva persona
     </a>
     </p>
@@ -40,25 +39,25 @@
                 <th>Eliminar</th>
                 </thead>
                 <tbody>
-                  @foreach($datos as $item)
+                  <?php $__currentLoopData = $datos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
                 <tr>
-                    <td>{{$item->id}}</td>
-                    <td>{{$item->Nombre}}</td>
-                    <td>{{$item->Apellido}}</td>
-                    <td>{{$item-> Telefono}}</td>
-                    <td>{{$item-> num_identificacion}}</td>
-                    <td>{{$item-> fecha_registro}}</td>
-                    <td>{{$item-> estado_cliente}}</td>
+                    <td><?php echo e($item->id); ?></td>
+                    <td><?php echo e($item->Nombre); ?></td>
+                    <td><?php echo e($item->Apellido); ?></td>
+                    <td><?php echo e($item-> Telefono); ?></td>
+                    <td><?php echo e($item-> num_identificacion); ?></td>
+                    <td><?php echo e($item-> fecha_registro); ?></td>
+                    <td><?php echo e($item-> estado_cliente); ?></td>
                     <td>
-                    <form action='{{ route("clientes.edit", $item->id) }}' method="GET">
+                    <form action='<?php echo e(route("clientes.edit", $item->id)); ?>' method="GET">
                      <button class="btb btb-warning btn-sm">
                      <span class="bi bi-pencil"></span>
                      </button>
                       </form>
                       </td>
                       <td>
-                      <form action="{{ route('clientes.show', $item->id) }}" method="GET">
+                      <form action="<?php echo e(route('clientes.show', $item->id)); ?>" method="GET">
                         <button class="btn btn-danger btn-sm">
                           <span class="bi bi-trash"></span>
                         </button>
@@ -67,7 +66,7 @@
                       </td>
                     </td>
                     </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                    
                 </tbody>
                 
@@ -78,6 +77,8 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
+
+<?php echo $__env->make('layout/pantilla', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\crud\primerCrud\resources\views/inicio.blade.php ENDPATH**/ ?>
